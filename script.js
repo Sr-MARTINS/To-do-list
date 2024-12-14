@@ -2,6 +2,22 @@ const container = document.querySelector(".container");
 const boxItens = document.querySelector(".box-itens")
 const frm = document.querySelector("form");
 
+frm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const item = frm.inItem.value;
+    
+    if(item == "") {
+        alert("Pfvr, adicione um item para continuarmos!")
+        frm.inItem.focus();
+        return
+    }
+
+    elementTemp(item)
+    frm.reset()
+    frm.inItem.focus()  
+})
+
 const elementTemp = (item) => {
 
     const li = document.createElement("li");
@@ -45,9 +61,13 @@ const elementTemp = (item) => {
     });
 
     btEdit.addEventListener("click", () => {
-        const eddText = prompt(`Editar item` )
+        const itemEditado = prompt("Modificar Item")
+        if(itemEditado == "") {
+            alert("você não preencheu o campo")
+            return
+        }
 
-        item.innerHtml = eddText
+        divCont.innerHTML = itemEditado
     });
 
     btDelet.addEventListener("click", (e) => {
@@ -59,19 +79,3 @@ const elementTemp = (item) => {
 
 }
 
-
-frm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const item = frm.inItem.value;
-    
-    if(item == "") {
-        alert("Pfvr, adicione um item para continuarmos!")
-        frm.inItem.focus();
-        return
-    }
-
-    elementTemp(item)
-    frm.reset()
-    frm.inItem.focus()  
-})
